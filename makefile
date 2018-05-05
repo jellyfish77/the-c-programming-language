@@ -10,11 +10,13 @@ CC = gcc
 #  -Wall turns on most, but not all, compiler warnings
 #  -O2   optimization level 2
 #  -O0   default optimization
-CFLAGS  = -ggdb -Wall -O0
+CFLAGS  = -ggdb -Wall -O0 -g
 
 # the build target executable:
 TARGET = in_out_redirect
 LINKED_BINARY = $(TARGET)
+
+INCL = /include
 
 all: clean functions.o $(TARGET).o
 	$(CC) $(CFLAGS) -o ./bin/$(LINKED_BINARY) ./bin/$(TARGET).o ./bin/functions.o
