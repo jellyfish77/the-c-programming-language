@@ -16,31 +16,33 @@ CFLAGS  = -ggdb -Wall -O0 -g
 SRC = /src
 INCL = /include
 
-# the build target executable:
-
-TARGET = 8.2.1
-TARGET_PATH = /src/ch8
-
+TARGET_PATH = $(SRC)/ch8
 LINKED_BINARY = $(TARGET)
 
 
+all: clean 
+	$(call build_libraries)
+	$(call build_binary,8.2.1,$(SRC)/ch8)
 
-#format:
-#[label]: [list of prerequites] 
-#	commands to execute when [label] called...
-
-# link object files into binary
-all: clean functions.o $(TARGET).o
-	$(CC) $(CFLAGS) -o ./bin/$(LINKED_BINARY) ./obj/$(TARGET).o ./obj/functions.o
-
-# build object file
-$(TARGET).o: 
-	$(CC) $(CFLAGS) -o ./obj/$(TARGET).o -c .$(TARGET_PATH)/$(TARGET).c
-
-# build functions object file 
-functions.o: 
-	$(CC) $(CFLAGS) -o ./obj/functions.o -c ./lib/functions.c
-
-# make sure output folders exist remove all existing files
 clean:
+	#setup output folders:
 	mkdir ./obj -p; rm ./obj/* -f; mkdir ./bin -p; rm ./bin/* -f
+
+define build_libraries
+	#build library object file(s):
+	$(CC) $(CFLAGS) -o ./obj/functions.o -c ./lib/functions.c
+endef
+
+define build_binary
+	#build object file for $(1).c:
+	$(CC) $(CFLAGS) -o ./obj/$(1).o -c .$(2)/$(1).c
+
+	#link object files and libraries into binary:
+	$(CC) $(CFLAGS) -o ./bin/$1 ./obj/$1.o ./obj/functions.o
+endef
+
+
+
+
+
+
