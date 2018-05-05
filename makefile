@@ -23,6 +23,7 @@ LINKED_BINARY = $(TARGET)
 all: clean 
 	$(call build_libraries)
 	$(call build_binary,8.2.1,$(SRC)/ch8)
+	$(call build_binary,8.2.2,$(SRC)/ch8)
 
 clean:
 	#setup output folders:
