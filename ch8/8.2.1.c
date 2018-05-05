@@ -1,5 +1,7 @@
 #include syscalls.
 
+/* in->out redirect */
+
 main() copy input to output *1
 {
 	char buf[BUFSIZ];
