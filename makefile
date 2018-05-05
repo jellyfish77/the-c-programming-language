@@ -18,6 +18,10 @@ LINKED_BINARY = $(TARGET)
 
 INCL = /include
 
+#format:
+#[label]: [list of prerequites] 
+#	commands to execute when [label] called...
+
 all: clean functions.o $(TARGET).o
 	$(CC) $(CFLAGS) -o ./bin/$(LINKED_BINARY) ./bin/$(TARGET).o ./bin/functions.o
 
