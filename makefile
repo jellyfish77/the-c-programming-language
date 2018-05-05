@@ -12,28 +12,35 @@ CC = gcc
 #  -O0   default optimization
 CFLAGS  = -ggdb -Wall -O0 -g
 
+# relative paths (not sure if this is best practice)
+SRC = /src
+INCL = /include
+
 # the build target executable:
-TARGET = in_out_redirect
+
+TARGET = 8.2.1
+TARGET_PATH = /src/ch8
+
 LINKED_BINARY = $(TARGET)
 
-INCL = /include
+
 
 #format:
 #[label]: [list of prerequites] 
 #	commands to execute when [label] called...
 
+# link object files into binary
 all: clean functions.o $(TARGET).o
-	$(CC) $(CFLAGS) -o ./bin/$(LINKED_BINARY) ./bin/$(TARGET).o ./bin/functions.o
+	$(CC) $(CFLAGS) -o ./bin/$(LINKED_BINARY) ./obj/$(TARGET).o ./obj/functions.o
 
+# build object file
+$(TARGET).o: 
+	$(CC) $(CFLAGS) -o ./obj/$(TARGET).o -c .$(TARGET_PATH)/$(TARGET).c
 
-$(TARGET).o: $(TARGET).c
-	$(CC) $(CFLAGS) -o ./bin/$(TARGET).o -c $(TARGET).c
+# build functions object file 
+functions.o: 
+	$(CC) $(CFLAGS) -o ./obj/functions.o -c ./lib/functions.c
 
-functions.o: functions.c functions.h
-	$(CC) $(CFLAGS) -o ./bin/functions.o -c functions.c
-
-
-# set up clean bin folder
+# make sure output folders exist remove all existing files
 clean:
-	mkdir ./bin -p; rm ./bin/* -f
-#	rmdir ./bin; mkdir ./bin
+	mkdir ./obj -p; rm ./obj/* -f; mkdir ./bin -p; rm ./bin/* -f

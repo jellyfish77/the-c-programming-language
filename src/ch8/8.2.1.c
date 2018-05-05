@@ -1,10 +1,11 @@
 #include <unistd.h>
+#include <stdio.h>
 //#include "syscalls.h" /* deprecated?/*
 
 // my includes
 #include "../../include/functions.h"
 
-main()	/*copy input to output */
+int main()	/*copy input to output */
 {
 	char buf[BUFSIZ];
 	int n;
