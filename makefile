@@ -15,30 +15,44 @@ CFLAGS  = -ggdb -Wall -O0 -g
 # relative paths (not sure if this is best practice)
 SRC = /src
 INCL = /include
+LIB = /lib
+OBJ = /obj
+BIN = /bin
 
 all: clean 
-	$(call build_libraries)
-	$(call build_binary,8.2.1,$(SRC)/ch8)
-
+#	$(call build_libraries,functions,$(LIB),%(OBJ))
+#	$(call build_binary,8.2.1,$(SRC)/ch8)
+#	$(call build,functions,$(LIB),$(OBJ))
+	$(call build_object,/ch8,8.2.1,$(SRC),$(OBJ))
+	$(call build_object,$(LIB),functions,,$(OBJ))
+	$(call link_objects,/ch8,8.2.1,.$(OBJ)/ch8/8.2.1.o,.$(OBJ)$(LIB)/functions.o)
+	
 clean:
 	#setup output folders:
-	mkdir ./obj -p; rm ./obj/* -f; mkdir ./bin -p; rm ./bin/* -f
+	rm ./obj -rf; mkdir ./obj -p; rm ./bin -rf; mkdir ./bin -p
 
 define build_libraries
-	#build library object file(s):
-	$(CC) $(CFLAGS) -o ./obj/functions.o -c ./lib/functions.c
+	#build object file for library "$(1).c":
+	$(CC) $(CFLAGS) -o .$(OBJ)/$(1).o -c .$(LIB)/$(1).c
 endef
 
 define build_binary
-	#build object file for $(1).c:
+	#build object file for source "$(1).c":
 	$(CC) $(CFLAGS) -o ./obj/$(1).o -c .$(2)/$(1).c
 
 	#link object files and libraries into binary:
-	$(CC) $(CFLAGS) -o ./bin/$1 ./obj/$1.o ./obj/functions.o
+	$(CC) $(CFLAGS) -o ./bin/$1 ./obj/$1.o ./obj/functions.o	
 endef
 
+define build_object 
+	mkdir .$(4)$(1)
+	$(CC) $(CFLAGS) -o .$(4)$(1)/$(2).o -c .$(3)$(1)/$(2).c
+endef
 
-
+define link_objects
+	mkdir .$(BIN)$1
+	$(CC) $(CFLAGS) -o .$(BIN)$1/$2 $3 $4
+endef
 
 
 
