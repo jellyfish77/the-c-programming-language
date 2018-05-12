@@ -16,14 +16,9 @@ CFLAGS  = -ggdb -Wall -O0 -g
 SRC = /src
 INCL = /include
 
-TARGET_PATH = $(SRC)/ch8
-LINKED_BINARY = $(TARGET)
-
-
 all: clean 
 	$(call build_libraries)
 	$(call build_binary,8.2.1,$(SRC)/ch8)
-	$(call build_binary,8.2.2,$(SRC)/ch8)
 
 clean:
 	#setup output folders:
