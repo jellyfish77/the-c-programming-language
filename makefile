@@ -1,7 +1,3 @@
-#instructions:
-#	Set up dependancies under "all" target
-#	set the target filename variable for the source file
-
 # the compiler: $(CC) for C program, define as g++ for C++
 CC = gcc
 
@@ -12,13 +8,14 @@ CC = gcc
 #  -O0   default optimization
 CFLAGS  = -ggdb -Wall -O0 -g
 
-# relative paths (not sure if this is best practice)
+# define folders
 SRC = /src
 INCL = /include
 LIB = /lib
 OBJ = /obj
 BIN = /bin
 
+# add all files to build here
 all: clean 
 	$(call build_object,.$(SRC)/ch8,8.2.1.c,.$(OBJ)/ch8,8.2.1.o)
 	$(call build_object,.$(LIB),functions.c,.$(OBJ),functions.o)
