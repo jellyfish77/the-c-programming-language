@@ -18,9 +18,10 @@ BIN = /bin
 # add all files to build here
 all: clean 
 	$(call build_object,.$(SRC)/ch8,8.2.1.c,.$(OBJ)/ch8,8.2.1.o)
+	$(call build_object,.$(SRC)/ch8,8.2.2.c,.$(OBJ)/ch8,8.2.2.o)
 	$(call build_object,.$(LIB),functions.c,.$(OBJ),functions.o)
-	$(call build_object,.$(LIB),functions2.c,.$(OBJ),functions2.o)
 	$(call link_objects,$(BIN)/ch8,8.2.1,.$(OBJ)/ch8/8.2.1.o .$(OBJ)/functions.o)
+	$(call link_objects,$(BIN)/ch8,8.2.2,.$(OBJ)/ch8/8.2.2.o)
 
 clean:
 	rm ./obj -rf; rm ./bin -rf
