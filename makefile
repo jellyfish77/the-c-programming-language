@@ -20,39 +20,24 @@ OBJ = /obj
 BIN = /bin
 
 all: clean 
-#	$(call build_libraries,functions,$(LIB),%(OBJ))
-#	$(call build_binary,8.2.1,$(SRC)/ch8)
-#	$(call build,functions,$(LIB),$(OBJ))
-	$(call build_object,/ch8,8.2.1,$(SRC),$(OBJ))
-	$(call build_object,$(LIB),functions,,$(OBJ))
-	$(call link_objects,/ch8,8.2.1,.$(OBJ)/ch8/8.2.1.o,.$(OBJ)$(LIB)/functions.o)
-	
+	$(call build_object,.$(SRC)/ch8,8.2.1.c,.$(OBJ)/ch8,8.2.1.o)
+	$(call build_object,.$(LIB),functions.c,.$(OBJ),functions.o)
+	$(call build_object,.$(LIB),functions2.c,.$(OBJ),functions2.o)
+	$(call link_objects,$(BIN)/ch8,8.2.1,.$(OBJ)/ch8/8.2.1.o .$(OBJ)/functions.o)
+
 clean:
-	#setup output folders:
-	rm ./obj -rf; mkdir ./obj -p; rm ./bin -rf; mkdir ./bin -p
+	rm ./obj -rf; rm ./bin -rf
 
-define build_libraries
-	#build object file for library "$(1).c":
-	$(CC) $(CFLAGS) -o .$(OBJ)/$(1).o -c .$(LIB)/$(1).c
+#build object from source "$(1)/$(2)":
+define build_object
+	mkdir $(3) -p
+	$(CC) $(CFLAGS) -o $(3)/$(4) -c $(1)/$(2)
 endef
 
-define build_binary
-	#build object file for source "$(1).c":
-	$(CC) $(CFLAGS) -o ./obj/$(1).o -c .$(2)/$(1).c
-
-	#link object files and libraries into binary:
-	$(CC) $(CFLAGS) -o ./bin/$1 ./obj/$1.o ./obj/functions.o	
-endef
-
-define build_object 
-	mkdir .$(4)$(1)
-	$(CC) $(CFLAGS) -o .$(4)$(1)/$(2).o -c .$(3)$(1)/$(2).c
-endef
-
+#link all supplied objects into binary "$(1)/$(2)"...
 define link_objects
-	mkdir .$(BIN)$1
-	$(CC) $(CFLAGS) -o .$(BIN)$1/$2 $3 $4
+	mkdir .$(1) -p
+	$(CC) $(CFLAGS) -o .$1/$2 $3
 endef
-
 
 
