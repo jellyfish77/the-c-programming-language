@@ -41,6 +41,6 @@ int min(int arg_count, ...)
 int main()
 {
     int count = 5;
-    printf("Minimum value is %d", min(count, 12, 67, 6, 7, 100));
+    printf("Minimum value is %d\n", min(count, 12, 67, 6, 7, 100));
     return 0;
 }
