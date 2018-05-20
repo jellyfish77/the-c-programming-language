@@ -30,12 +30,16 @@ all: otherstuff clean
 	$(call build_object,.$(LIB),functions.c,.$(OBJ),functions.o)
 
 	@echo Building sources...
+	$(call build_object,.$(SRC)/ch1,1.1.13.c,.$(OBJ)/ch1,1.1.13.o)
+	$(call build_object,.$(SRC)/ch5,pointers.c,.$(OBJ)/ch5,pointers.o)
 	$(call build_object,.$(SRC)/ch8,8.2.1.c,.$(OBJ)/ch8,8.2.1.o)
 	$(call build_object,.$(SRC)/ch8,8.2.2.c,.$(OBJ)/ch8,8.2.2.o)
 	$(call build_object,.$(SRC)/ch8,variable_args.c,.$(OBJ)/ch8,variable_args.o)
 	$(call build_object2,ch8,ternary_operators)	
 	
 	@echo Linking objects...
+	$(call link_objects,$(BIN)/ch1,1.1.13,.$(OBJ)/ch1/1.1.13.o .$(OBJ)/functions.o)
+	$(call link_objects,$(BIN)/ch5,pointers, .$(OBJ)/ch5/pointers.o)
 	$(call link_objects,$(BIN)/ch8,8.2.1,.$(OBJ)/ch8/8.2.1.o .$(OBJ)/functions.o)
 	$(call link_objects,$(BIN)/ch8,8.2.2,.$(OBJ)/ch8/8.2.2.o)
 	$(call link_objects,$(BIN)/ch8,variable_args, .$(OBJ)/ch8/variable_args.o)

@@ -2,12 +2,15 @@
 #include <stdio.h>
 
 int main() {
-	char buf[1];
-	int x = 1;
-	x == 3 ? x++ : x--;
+	char buf[1];	// define arr of 1 byte
+	int x = 1;	// ints are 4 bytes
+	x == 3 ? x++ : x--;	// ternary
 	buf[0] = x+48;
+	
 	//buf[0] = '0';
 
+	putchar(x);	// put ascii of num
+	putchar('\n');
 	printf("%d\n", buf[0]);
 	printf("%zu\n", sizeof(x));
 	printf("%d\n", buf[0]);
