@@ -28,34 +28,53 @@ objects = $(subst .c,.o,$(sources))
 all: otherstuff clean 
 	@echo Builing libraries...
 	$(call build_object,.$(LIB),functions.c,.$(OBJ),functions.o)
-	
+
 	@echo Building sources...
 	$(call build_object,.$(SRC)/ch8,8.2.1.c,.$(OBJ)/ch8,8.2.1.o)
 	$(call build_object,.$(SRC)/ch8,8.2.2.c,.$(OBJ)/ch8,8.2.2.o)
 	$(call build_object,.$(SRC)/ch8,variable_args.c,.$(OBJ)/ch8,variable_args.o)
+	$(call build_object2,ch8,ternary_operators)	
 	
 	@echo Linking objects...
 	$(call link_objects,$(BIN)/ch8,8.2.1,.$(OBJ)/ch8/8.2.1.o .$(OBJ)/functions.o)
 	$(call link_objects,$(BIN)/ch8,8.2.2,.$(OBJ)/ch8/8.2.2.o)
 	$(call link_objects,$(BIN)/ch8,variable_args, .$(OBJ)/ch8/variable_args.o)
-	
+	$(call link_objects,$(BIN)/ch8,ternary_operators, .$(OBJ)/ch8/ternary_operators.o)
+
 clean:
 	@echo Cleaning folders...
 	@rm ./obj -rf; rm ./bin -rf
 
 otherstuff:
-	@echo Files to be compiled: $(SOURCES)
+	@echo Source files found: $(SOURCES)
 	@echo
 
-#build object from source "$(1)/$(2)":
+#build object file from source file
+#	params:
+#		$(1) source folder
+#		$(2) source file
+#		$(3) output folder
+#		$(4) output file
 define build_object
 	@mkdir $(3) -p
+	#$(1)/$(2) -> $(3)/$(4)
 	@$(CC) $(CFLAGS) -o $(3)/$(4) -c $(1)/$(2)
 endef
 
-#link all supplied objects into binary "$(1)/$(2)"...
+define build_object2
+	@mkdir .$(OBJ)/$(1)-p
+	#.$(SRC)/$(1)/$(2).c -> .$(OBJ)/$(1)/$(2).o
+	@$(CC) $(CFLAGS) -o .$(OBJ)/$(1)/$(2).o -c .$(SRC)/$(1)/$(2).c
+endef
+
+#link all supplied objects into binary
+#	params:
+#		$(1) output folder
+#		$(2) output file 
+#		$(3) input object files
 define link_objects
 	@mkdir .$(1) -p
+	#$(3) -> $(1)/$(2)
 	@$(CC) $(CFLAGS) -o .$1/$2 $3
 endef
 
