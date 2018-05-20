@@ -2,8 +2,34 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
+	int int_var = 11;
+	 printf("Value of variable int_var is: %d", int_var);
+	/* To print the address of a variable we use %p format specifier and ampersand (&) sign just
+	 before the variable name like &num. */
+   	printf("\nAddress of variable int_var is: %p", &int_var);
+	
+	int* stack_ptr;
+	stack_ptr = &int_var;	
+	printf("\nAddress of stack_ptr is: %p", &stack_ptr);
+	printf("\nValue of stack_ptr is: %p", stack_ptr);
+	printf("\nValue pointed to by stack_ptr is: %d", *stack_ptr);
+	printf("\n");
+
+
 	//int* p; // variable p is pointer to integer type
-	int* p = malloc(sizeof(int));
+	int* heap_ptr = malloc(sizeof(int));	// return an address on the heap		
+	*heap_ptr=22;
+	printf("\nAddress of heap_ptr is: %p", &heap_ptr);
+	printf("\nValue of heap_ptr is: %p", heap_ptr);
+	printf("\nValue pointed to by heap_ptr is: %d", *heap_ptr);
+	free(heap_ptr);
+	printf("\nAddress of heap_ptr is: %p", &heap_ptr);
+	printf("\nValue of heap_ptr is: %p", heap_ptr);
+	printf("\nValue pointed to by heap_ptr is: %d", *heap_ptr);
+	printf("\n");
+
+
+	/*
 	//void* shared = malloc(sizeof(int));
 	//p = shared;
 	*p = 19;
@@ -16,6 +42,7 @@ int main(int argc, char *argv[]) {
 	free(p);
 	printf("%d\n",*p);		// the value pointed to by the pointer.
 
+	*/
 	/*	
 	int i2; // integer value
 
