@@ -2,16 +2,18 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
-	int* p; // variable p is pointer to integer type
-	void* shared = malloc(sizeof(int));
-	p = shared;
+	//int* p; // variable p is pointer to integer type
+	int* p = malloc(sizeof(int));
+	//void* shared = malloc(sizeof(int));
+	//p = shared;
 	*p = 19;
 	printf("%zu\n",sizeof(*p));	// 4 bytes (i.e. the int)
 	printf("%zu\n",sizeof(p));	// 8 bytes (the point mem addr.)
-	printf("%p\n",p);		// the pointer mem addr.
-	printf("%p\n",&p);		// the variable mem addr.
-	printf("%d\n",*p);		// the value pointed to by the pointer.
-	free(shared);
+	printf("%p\n",&p);		// the variable mem addr (which contains the pointer)
+	printf("%p\n",p);		// the pointer mem addr (which contains the value)	
+	printf("%d\n",*p);		// the value pointed to by the pointer
+	//free(shared);
+	free(p);
 	printf("%d\n",*p);		// the value pointed to by the pointer.
 
 	/*	
