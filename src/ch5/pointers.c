@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
 	void* shared = malloc(sizeof(int));
 	p = shared;
 	*p = 19;
-	printf("%zu\n",sizeof(*p));	// 4 bytes (.e. the int)
+	printf("%zu\n",sizeof(*p));	// 4 bytes (i.e. the int)
 	printf("%zu\n",sizeof(p));	// 8 bytes (the point mem addr.)
 	printf("%p\n",p);		// the pointer mem addr.
 	printf("%p\n",&p);		// the variable mem addr.
