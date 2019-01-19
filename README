@@ -1,0 +1,8 @@
+To build binaries:
+
+Type 'make' at the root folder. 
+
+The makefile will be used to generate all objects into /obj, and link them into binaries into /bin.
+
+/obj and /bin are regenerated on make and can be deleted and rebuilt at any time.
+

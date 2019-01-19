@@ -6,7 +6,8 @@ CC = gcc
 #  -Wall turns on most, but not all, compiler warnings
 #  -O2   optimization level 2
 #  -O0   default optimization
-CFLAGS  = -ggdb -Wall -O0 -g
+#  -v    verbose mode
+CFLAGS  = -ggdb -Wall -O0 -g 
 
 # define folders
 SRC = /src
@@ -39,11 +40,11 @@ all: otherstuff clean
 	
 	@echo Linking objects...
 	$(call link_objects,$(BIN)/ch1,1.1.13,.$(OBJ)/ch1/1.1.13.o .$(OBJ)/functions.o)
-	$(call link_objects,$(BIN)/ch5,pointers, .$(OBJ)/ch5/pointers.o)
+	$(call link_objects,$(BIN)/ch5,pointers,.$(OBJ)/ch5/pointers.o)
 	$(call link_objects,$(BIN)/ch8,8.2.1,.$(OBJ)/ch8/8.2.1.o .$(OBJ)/functions.o)
 	$(call link_objects,$(BIN)/ch8,8.2.2,.$(OBJ)/ch8/8.2.2.o)
-	$(call link_objects,$(BIN)/ch8,variable_args, .$(OBJ)/ch8/variable_args.o)
-	$(call link_objects,$(BIN)/ch8,ternary_operators, .$(OBJ)/ch8/ternary_operators.o)
+	$(call link_objects,$(BIN)/ch8,variable_args,.$(OBJ)/ch8/variable_args.o)
+	$(call link_objects,$(BIN)/ch8,ternary_operators,.$(OBJ)/ch8/ternary_operators.o)
 
 clean:
 	@echo Cleaning folders...
