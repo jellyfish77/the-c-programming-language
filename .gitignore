@@ -47,10 +47,9 @@
 *.cmd
 .tmp_versions/
 modules.order
-Module.symvers
+Module.symversd
 Mkfile.old
 dkms.conf
 
-# OQ Ignore binaries
-bin/
-obj/
+/bin
+
