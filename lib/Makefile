@@ -19,11 +19,11 @@ LIBS := $(SOURCES:.c=.a)
 all: $(LIBS)
 
 #build all object files from c files
-%.o: %.c
+%.a: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 # Define clean as Phony target - i.e. run even if file named "clean" exists
 .PHONY: clean
 clean: 
-	$(info Removing all object files...)
-	rm -rf *.o
+	$(info Removing all library files...)
+	rm -rf *.a

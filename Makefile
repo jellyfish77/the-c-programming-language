@@ -13,15 +13,13 @@ libs:
 	cd lib && $(MAKE)
 
 all: libs	
-	$(info creating bin directories...)	
 	mkdir -p bin/ch1
 	mkdir -p bin/ch5
 	mkdir -p bin/ch8
 	$(info building...)
 	cd src/ch1 && $(MAKE)			
 	cd src/ch5 && $(MAKE)			
-	cd src/ch8 && $(MAKE)		
-	$(info linking...)
+	cd src/ch8 && $(MAKE)			
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/ch1/1.1.13 $(SRC_DIR)/ch1/1.1.13.o $(LIB_DIR)/functions.a
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/ch5/pointers $(SRC_DIR)/ch5/pointers.o
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/ch8/8.2.1 $(SRC_DIR)/ch8/8.2.1.o
@@ -35,5 +33,4 @@ clean:
 	cd src/ch5 && $(MAKE) clean
 	cd src/ch8 && $(MAKE) clean
 	rm -rf ./$(BIN_DIR)
-	
 	
