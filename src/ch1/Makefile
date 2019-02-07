@@ -25,5 +25,4 @@ all: $(OBJECTS)
 # Define clean as Phony target - i.e. run even if file named "clean" exists
 .PHONY: clean
 clean: 
-	$(info Removing all object files...)
 	rm -rf *.o
